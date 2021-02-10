@@ -17,10 +17,36 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public List<Car> GetAll()
+        
+            
+            public List<Car> GetAll()
         {
             return _carDal.GetAll();
 
         }
+
+        public void Add(Car car)
+        {
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine("Araba başarıyla eklendi.");
+            }
+            else
+            {
+                Console.WriteLine("Lütfen günlük fiyat kısmını 0'dan büyük giriniz.");
+            }
+        }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carDal.GetAll(c => c.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _carDal.GetAll(c => c.ColorId == id);
+        }
+
     }
 }
